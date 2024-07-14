@@ -52,9 +52,6 @@ function executeCommand(userInput) {
       let mail = "Contact Me via gmail";
       return `<a class="message" href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJqTfghgTtLnhcHJQhMrsSWsjlVQqBzLmWlvDFkrfqrgPrXmmsFKWDlCGvpkwmXJbmdfnPg">${mail}</a>`;
 
-    case "whoami":
-      return `<p class="message">HolyWat3r</p>`;
-
 
     case "dir":
       const list = pages.map((item) => `<span>${item}</span>`).join(" ");
@@ -82,23 +79,57 @@ function executeCommand(userInput) {
       }
       break;
 
-  
+      case "whoami":
+        if (args === "/priv") {
+          return `<div><pre>
+PRIVILEGES INFORMATION
+----------------------
+    
+Privilege Name                            Description                                                        State
+========================================  =================================================================  ========
+SeIncreaseQuotaPrivilege                  Adjust memory quotas for a process                                 Disabled
+SeSecurityPrivilege                       Manage auditing and security log                                   Disabled
+SeTakeOwnershipPrivilege                  Take ownership of files or other objects                           Disabled
+SeLoadDriverPrivilege                     Load and unload device drivers                                     Disabled
+SeSystemProfilePrivilege                  Profile system performance                                         Disabled
+SeSystemtimePrivilege                     Change the system time                                             Disabled
+SeProfileSingleProcessPrivilege           Profile single process                                             Disabled
+SeIncreaseBasePriorityPrivilege           Increase scheduling priority                                       Disabled
+SeCreatePagefilePrivilege                 Create a pagefile                                                  Disabled
+SeBackupPrivilege                         Back up files and directories                                      Disabled
+SeRestorePrivilege                        Restore files and directories                                      Disabled
+SeShutdownPrivilege                       Shut down the system                                               Disabled
+SeDebugPrivilege                          Debug programs                                                     Disabled
+SeSystemEnvironmentPrivilege              Modify firmware environment values                                 Disabled
+SeChangeNotifyPrivilege                   Bypass traverse checking                                           Enabled
+SeRemoteShutdownPrivilege                 Force shutdown from a remote system                                Disabled
+SeUndockPrivilege                         Remove computer from docking station                               Disabled
+SeManageVolumePrivilege                   Perform volume maintenance tasks                                   Disabled
+SeImpersonatePrivilege                    Impersonate a client after authentication                          Enabled
+SeCreateGlobalPrivilege                   Create global objects                                              Enabled
+SeIncreaseWorkingSetPrivilege             Increase a process working set                                     Disabled
+SeTimeZonePrivilege                       Change the time zone                                               Disabled
+SeCreateSymbolicLinkPrivilege             Create symbolic links                                              Disabled
+SeDelegateSessionUserImpersonatePrivilege Obtain an impersonation token for another user in the same session Disabled
 
+    </pre></div>`;
+        } else {
+          return `<p>HolyWat3r</p>`;
+        }
+
+    case "powershell":
     case "powershell.exe":
       isPowerShell = true;
       updatePrompt();
       return `<p>Windows PowerShell</p>
               <p>Copyright (C) Microsoft Corporation. All rights reserved.</p>
               <p>Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows</p>`;
-
+    
+    case "cmd":          
     case "cmd.exe":
       isPowerShell = false;
       updatePrompt();
       return `<p>Switching to command prompt...</p>`;
-
-  
-
-
   }
 
   if (userInput === "cat blog1.html") {
@@ -123,6 +154,29 @@ function handleInput(event) {
     outputEl.innerHTML += `<div class=prompt-wrapper><span>${prompt}</span><span>${userInput}</span></div>`;
     let result = executeCommand(userInput);
     if (result) outputEl.innerHTML += result;
+  } else if (event.keyCode === 9) {
+    // Tab key
+    event.preventDefault(); // Prevent default tab behavior
+    autocompleteCommand();
+  }
+}
+
+function autocompleteCommand() {
+  const userInput = inputEl.value.trim();
+  const possibleCommands = [
+    "help", "social", "echo", "about", "banner", "projects", "email", 
+    "whoami", "dir", "cls", "date", "type", "Set-MpPreference -DisableRealtimeMonitoring", 
+    "powershell.exe", "cmd.exe", "cat"
+  ];
+  
+  const matches = possibleCommands.filter(cmd => cmd.startsWith(userInput));
+  
+  if (matches.length === 1) {
+    inputEl.value = matches[0] + " ";
+  } else if (matches.length > 1) {
+    // Move the cursor to a new line and display the suggestions
+    outputEl.innerHTML += `<div class=prompt-wrapper><span>${prompt}</span><span>${userInput}</span></div>`;
+    outputEl.innerHTML += `<div class=message>${matches.join(" ")}</div>`;
   }
 }
 
@@ -140,11 +194,4 @@ const observer = new MutationObserver(() => {
 
 observer.observe(target, {
   childList: true,
-});
-
-editorBtn.addEventListener("click", () => {
-  console.log("hi");
-  let content = editorDOM.innerHTML;
-  localStorage.setItem("vi-content", content);
-  viDOM.classList.add("hidden");
 });

@@ -4,55 +4,14 @@ promptDOM.innerHTML = prompt;
 
 
 
-let welcome = `Microsoft Windows [Version 10.0.22631.3880]
+let welcome = `Microsoft Windows [Version 07.12.2000.xxxx]
 </p><p>
-(c) Microsoft Corporation. All rights reserved.</p>`;
+(c) H0lyWat3r Corporation. No rights reserved.</p>`;
 
 
 preRenderDOM.innerHTML += welcome;
 
-/*
-let figlet = `
-<pre class="figlet">
-888b.    db       db    Yb    dP    db    888      db    888b.    db    8b   d8 
-8  .8   dPYb     dPYb    Yb  dP    dPYb    8      dPYb   8  .8   dPYb   8YbmdP8 
-8wwP'  dPwwYb   dPwwYb    YbdP    dPwwYb   8     dPwwYb  8wwK'  dPwwYb  8  "  8 
-8     dP    Yb dP    Yb    YP    dP    Yb 888   dP    Yb 8  Yb dP    Yb 8     8 
-</pre
-      >
-      `;
 
-if (window.innerWidth < 480) {
-  figlet = `
-<pre class="figlet">
-/$$$$$$$   /$$$$$$ 
-| $$__  $$ /$$__  $$
-| $$  \\ $$| $$  \\ $$
-| $$$$$$$/| $$$$$$$$
-| $$____/ | $$__  $$
-| $$      | $$  | $$
-| $$      | $$  | $$
-|__/      |__/  |__/
-</pre
-      >
-      `;
-}
-
-let stickman = `
-<div class="stickman ">
-  <div class="head">
-    <div class="lefteye"></div>
-    <div class="righteye"></div>
-    <div class="mouth"></div>
-  </div>
-  <div class="body">
-    <div class="rightarm"></div>
-    <div class="leftarm"></div>
-    <div class="leftleg"></div>
-    <div class="rightleg"></div>
-  </div>
-</div>`;
-*/
 
 function getOS() {
   let Name = "unknown";
