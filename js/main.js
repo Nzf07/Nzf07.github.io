@@ -27,31 +27,13 @@ function executeCommand(userInput) {
       table += "</table>";
       return table;
 
-    case "social":
-      let social = "Will update when i need a job!!!!!!!!!";
-      return `<p class="message">${social}</p>`;
 
     case "echo":
       return `<p class="message">${userInput.substring(5)}</p>`;
 
     case "about":
-      let about = "I'm Nazeef Khan";
+      let about = "Hey! I'm Nazeef Khan and here I will be documenting my journey in Cybersecurity.";
       return `<p class="message">${about}</p>`;
-
-    case "banner":
-      let bannerText = "You are not the admin!!";
-      return `<p class='error'>"${bannerText}"</p>`;
-
-    case "projects":
-      let projects = [
-        "I will update the list of projects i'm working on soon....",
-      ];
-      return `<p id=projects>"${projects[0]}"</p>`;
-
-    case "email":
-      let mail = "Contact Me via gmail";
-      return `<a class="message" href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJqTfghgTtLnhcHJQhMrsSWsjlVQqBzLmWlvDFkrfqrgPrXmmsFKWDlCGvpkwmXJbmdfnPg">${mail}</a>`;
-
 
     case "dir":
       const list = pages.map((item) => `<span>${item}</span>`).join(" ");
@@ -67,12 +49,19 @@ function executeCommand(userInput) {
       const formattedDate = currentDate.toString();
       return `<p id='date'>${formattedDate}</p>`;
 
+      case "social":
+      return social.join("<br>");
+      
+
     case "type":
       if (!pages.includes(args))
-        return `<p class=error>Blog does not exist, type "ls" to view all the blogs</p>`;
+        return `<p>Blog does not exist, type "dir" to view all the blogs</p>`;
       window.open(args);
-      return "<p>Loading................</p>";
+      return "<p>Loading..............</p>";
 
+    case "meme":
+      return "<p>Command to be updated soon.</p>"
+      
     case "Set-MpPreference":
       if (args === "-DisableRealtimeMonitoring") {
         return "<p>Windows defender off, HolyWat3r defender ON ;)</p>";
@@ -121,9 +110,8 @@ SeDelegateSessionUserImpersonatePrivilege Obtain an impersonation token for anot
     case "powershell.exe":
       isPowerShell = true;
       updatePrompt();
-      return `<p>Windows PowerShell</p>
-              <p>Copyright (C) Microsoft Corporation. All rights reserved.</p>
-              <p>Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows</p>`;
+      return `<p>Windows wannabe PowerShell</p>
+              <p>No rights reserved.</p>`;
     
     case "cmd":          
     case "cmd.exe":
@@ -132,18 +120,6 @@ SeDelegateSessionUserImpersonatePrivilege Obtain an impersonation token for anot
       return `<p>Switching to command prompt...</p>`;
   }
 
-  if (userInput === "cat blog1.html") {
-    window.open("blog1.html");
-    return "<p>Loading................</p>";
-  } else if (userInput === "cat pnpt.html") {
-    window.open("pnpt.html");
-    return "<p>Loading................</p>";
-  } else if (userInput === "cat wannacry.html") {
-    window.open("wannacry.html");
-    return "<p>Loading................</p>";
-  } else {
-    return `<p class=message>Command not found: ${cmd}</p>`;
-  }
 }
 
 function handleInput(event) {
@@ -158,15 +134,19 @@ function handleInput(event) {
     // Tab key
     event.preventDefault(); // Prevent default tab behavior
     autocompleteCommand();
+  } else if (event.ctrlKey && event.key === 'c') {
+    // CTRL+C key
+    event.preventDefault();
+    outputEl.innerHTML += `<div class=prompt-wrapper><span>${prompt}</span><span></span></div>`;
+    inputEl.value = '';
   }
 }
 
 function autocompleteCommand() {
   const userInput = inputEl.value.trim();
   const possibleCommands = [
-    "help", "social", "echo", "about", "banner", "projects", "email", 
-    "whoami", "dir", "cls", "date", "type", "Set-MpPreference -DisableRealtimeMonitoring", 
-    "powershell.exe", "cmd.exe", "cat"
+    "help", "social", "echo", "about", "whoami", "dir", "cls", "meme" , "date", "type", "Set-MpPreference -DisableRealtimeMonitoring", 
+    "powershell.exe", "cmd.exe", "cpts.html", "crto.html"
   ];
   
   const matches = possibleCommands.filter(cmd => cmd.startsWith(userInput));

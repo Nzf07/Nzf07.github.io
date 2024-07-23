@@ -4,9 +4,10 @@ promptDOM.innerHTML = prompt;
 
 
 
-let welcome = `Microsoft Windows [Version 07.12.2000.xxxx]
+let welcome = `<p>H0lyWat3r's decent wesbite [Version 07.12.2000.xxxx]
 </p><p>
-(c) H0lyWat3r Corporation. No rights reserved.</p>`;
+(c) H0lyWat3r Corporation. No rights reserved.</p>
+<p>The website was inspired by KillSwitch a.k.a. Paavai Aram</p>`;
 
 
 preRenderDOM.innerHTML += welcome;
