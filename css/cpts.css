@@ -181,9 +181,49 @@ a:hover {
   text-decoration: none;
   transition: color 0.3s ease, text-decoration 0.3s ease;
 }
-p {
-  text-align: justify;
 
+
+
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  .profile {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 200%;
+  }
+
+  .profile img {
+    margin-bottom: 10px;
+  }
+
+  .toc ul li {
+    padding: 5px;
+  }
+
+  .toc ul li a {
+    font-size: 14px;
+  }
+
+  .content h1 {
+    font-size: 20px;
+  }
+
+  .content h2 {
+    font-size: 18px;
+  }
+
+  .content time {
+    font-size: 12px;
+  }
+
+  .content {
+    width: 500%;
+  }
+
+  .toc {
+    width: 150%;
+  }
 }
-
-
